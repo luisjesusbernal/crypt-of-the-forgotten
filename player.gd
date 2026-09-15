@@ -7,6 +7,12 @@ const DASH_SPEED = 850.0
 const DASH_DURATION = 0.18
 const DASH_COOLDOWN = 0.45
 const FIREBALL_SCENE = preload("res://fireball.tscn")
+const FIREBALL_MANA_COST = 20.0
+const MANA_REGEN_RATE = 15.0
+const KNOCKBACK_FORCE = 450.0
+const KNOCKBACK_UP_FORCE = 220.0
+const HURT_DURATION = 0.5
+const KNOCKBACK_DECELERATION = 900.0
 
 var dash_time_left = 0.0
 var facing_direction = 1.0
@@ -18,6 +24,11 @@ var health = 3
 
 var max_mana = 100.0
 var mana = 100.0
+
+var is_hurt = false
+var hurt_time_left = 0.0
+
+var is_dead = false
 
 @onready var sword_collision: CollisionShape2D = $SwordHitbox/CollisionShape2D
 @onready var attack_timer: Timer = $AttackTimer
@@ -33,19 +44,31 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Reducir el tiempo de cooldown del dash.
+	# Regenerar maná.
+	if mana < max_mana:
+		mana = min(mana + MANA_REGEN_RATE * delta, max_mana)
+
+	# Cooldown del dash.
 	if dash_cooldown_left > 0:
 		dash_cooldown_left -= delta
 
-	# Salto.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	# Duración del estado de daño.
+	if is_hurt:
+		hurt_time_left -= delta
+
+		if hurt_time_left <= 0:
+			is_hurt = false
+			player_visual.modulate = Color.WHITE
+			
+	# Dirección horizontal.
+	var direction := Input.get_axis("move_left", "move_right")
+
+	# Saltar solamente si no estamos recibiendo daño.
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not is_hurt:
 		velocity.y = JUMP_VELOCITY
 
-	# Movimiento horizontal.
-	var direction := Input.get_axis("move_left", "move_right")
-	
-	# Cambiar animación según el movimiento.
-	if not is_attacking:
+	# Animaciones normales.
+	if not is_attacking and not is_hurt:
 		if dash_time_left > 0:
 			player_visual.play("dash")
 		elif not is_on_floor():
@@ -55,22 +78,31 @@ func _physics_process(delta: float) -> void:
 		else:
 			player_visual.play("idle")
 
-	# Recordar hacia qué lado está mirando el jugador.
-	if direction != 0:
+	# Actualizar dirección solamente si tenemos control.
+	if direction != 0 and not is_hurt:
 		facing_direction = direction
 		player_visual.flip_h = direction < 0
 		sword_hitbox.position.x = 30.0 * facing_direction
 		fireball_spawn.position.x = 30.0 * facing_direction
 
-	# Activar dash solamente si no está en cooldown.
-	if Input.is_action_just_pressed("dash") and dash_time_left <= 0 and dash_cooldown_left <= 0:
+	# Activar dash.
+	if Input.is_action_just_pressed("dash") and dash_time_left <= 0 and dash_cooldown_left <= 0 and not is_hurt:
 		dash_time_left = DASH_DURATION
 		dash_cooldown_left = DASH_COOLDOWN
 
-	# Movimiento durante dash o movimiento normal.
-	if dash_time_left > 0:
+	# Movimiento horizontal.
+	if is_hurt:
+	# El golpe comienza fuerte, pero pierde velocidad gradualmente.
+		velocity.x = move_toward(
+			velocity.x,
+			0,
+			KNOCKBACK_DECELERATION * delta
+		)
+
+	elif dash_time_left > 0:
 		dash_time_left -= delta
 		velocity.x = facing_direction * DASH_SPEED
+
 	else:
 		if direction:
 			velocity.x = direction * SPEED
@@ -78,19 +110,21 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	# Ataque con espada.
-	if Input.is_action_just_pressed("attack") and attack_timer.is_stopped() and not is_attacking:
+	if Input.is_action_just_pressed("attack") and attack_timer.is_stopped() and not is_attacking and not is_hurt:
 		is_attacking = true
 		player_visual.play("attack")
 		sword_collision.set_deferred("disabled", false)
 		attack_timer.start()
 
-		# Lanzar bola de fuego.
-	if Input.is_action_just_pressed("magic"):
+	# Lanzar bola de fuego.
+	if Input.is_action_just_pressed("magic") and mana >= FIREBALL_MANA_COST and not is_hurt:
+		mana -= FIREBALL_MANA_COST
+
 		var fireball = FIREBALL_SCENE.instantiate()
 		get_tree().current_scene.add_child(fireball)
 		fireball.global_position = fireball_spawn.global_position
 		fireball.direction = facing_direction
-		
+
 	move_and_slide()
 
 
@@ -109,3 +143,44 @@ func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 func _on_player_visual_animation_finished() -> void:
 	if player_visual.animation == "attack":
 		is_attacking = false
+
+	elif player_visual.animation == "death":
+		var hud = get_node("../HUD")
+		hud.show_death_screen()
+
+func take_damage(amount: int, source_position: Vector2) -> void:
+	if is_dead:
+		return
+	health -= amount
+	health = max(health, 0)
+
+	var knockback_direction = sign(global_position.x - source_position.x)
+
+	if knockback_direction == 0:
+		knockback_direction = -facing_direction
+
+	velocity.x = knockback_direction * KNOCKBACK_FORCE
+	velocity.y = -KNOCKBACK_UP_FORCE
+	
+	is_hurt = true
+	dash_time_left = 0.0
+	hurt_time_left = HURT_DURATION
+	
+	player_visual.play("hurt")
+	player_visual.modulate = Color(1.0, 0.35, 0.35)
+	
+	print("Vida del jugador: ", health)
+	if health <= 0:
+		die()
+
+func die() -> void:
+	if is_dead:
+		return
+
+	is_dead = true
+	velocity = Vector2.ZERO
+
+	player_visual.modulate = Color.WHITE
+	player_visual.play("death")
+
+	set_physics_process(false)

@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://ct0f1cvxgq1xa" path="res://assets/player/dash.png" id="3_5vw27"]
 [ext_resource type="Script" uid="uid://uhf0eb3wk2vr" path="res://test_enemy.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://da2peuhvkjamh" path="res://assets/player/player_walk_fixed.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://c6kwx20uw0eof" path="res://assets/player/hurt.png" id="4_4c57u"]
 [ext_resource type="Texture2D" uid="uid://du5hyv1n6rih1" path="res://assets/player/jump_final.png" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://jiv75el5tt35" path="res://assets/player/death_fixed.png" id="4_efxa6"]
+[ext_resource type="Script" uid="uid://c365tetq46o8l" path="res://hud.gd" id="9_kek77"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
 size = Vector2(900, 60)
@@ -53,6 +56,54 @@ region = Rect2(627, 0, 627, 836)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuqvo"]
 atlas = ExtResource("3_5vw27")
 region = Rect2(1254, 0, 627, 836)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rl1p"]
+atlas = ExtResource("4_efxa6")
+region = Rect2(0, 0, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok6jj"]
+atlas = ExtResource("4_efxa6")
+region = Rect2(443, 0, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_facbu"]
+atlas = ExtResource("4_efxa6")
+region = Rect2(886, 0, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1qrp"]
+atlas = ExtResource("4_efxa6")
+region = Rect2(0, 591, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_come4"]
+atlas = ExtResource("4_efxa6")
+region = Rect2(443, 591, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8e4i"]
+atlas = ExtResource("4_efxa6")
+region = Rect2(886, 591, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsp4k"]
+atlas = ExtResource("4_4c57u")
+region = Rect2(0, 0, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq58d"]
+atlas = ExtResource("4_4c57u")
+region = Rect2(443, 0, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seu75"]
+atlas = ExtResource("4_4c57u")
+region = Rect2(886, 0, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htxhm"]
+atlas = ExtResource("4_4c57u")
+region = Rect2(0, 591, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq2sk"]
+atlas = ExtResource("4_4c57u")
+region = Rect2(443, 591, 443, 591)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k2k6"]
+atlas = ExtResource("4_4c57u")
+region = Rect2(886, 591, 443, 591)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
 atlas = ExtResource("2_1bvp3")
@@ -151,7 +202,53 @@ animations = [{
 }],
 "loop": 0,
 "name": &"dash",
-"speed": 16.0
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rl1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ok6jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_facbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1qrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_come4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8e4i")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsp4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kq58d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seu75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htxhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq2sk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4k2k6")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -182,7 +279,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"jump",
-"speed": 8.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -211,10 +308,16 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 8.0
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_we2th"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxrq4"]
+size = Vector2(38, 50)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
+bg_color = Color(0.24705882, 0.6627451, 0.9607843, 1)
 
 [node name="Main" type="Node2D" unique_id=1972889514]
 
@@ -251,7 +354,9 @@ one_shot = true
 [node name="PlayerVisual" type="AnimatedSprite2D" parent="Player" unique_id=882115640]
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_nmpfp")
-animation = &"dash"
+animation = &"death"
+frame = 5
+frame_progress = 1.0
 
 [node name="FireballSpawn" type="Marker2D" parent="Player" unique_id=601515633]
 position = Vector2(30, 0)
@@ -268,6 +373,113 @@ modulate = Color(0.9444067, 0.6624789, 0.15236312, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ig7tw")
 
+[node name="DamageArea" type="Area2D" parent="TestEnemy" unique_id=465923507]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestEnemy/DamageArea" unique_id=125413779]
+shape = SubResource("RectangleShape2D_lxrq4")
+
+[node name="DamageCooldown" type="Timer" parent="TestEnemy" unique_id=688446076]
+wait_time = 0.8
+one_shot = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=2109789310]
+process_mode = 3
+script = ExtResource("9_kek77")
+
+[node name="HealthLabel" type="Label" parent="HUD" unique_id=184626916]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 62.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(0.9098039, 0.2901961, 0.37254903, 1)
+theme_override_font_sizes/font_size = 28
+text = "♥ ♥ ♥"
+
+[node name="ManaBar" type="ProgressBar" parent="HUD" unique_id=1297076277]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 78.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
+value = 100.0
+show_percentage = false
+
+[node name="DeathScreen" type="ColorRect" parent="HUD" unique_id=966930988]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.70980394)
+
+[node name="DeathContent" type="CenterContainer" parent="HUD/DeathScreen" unique_id=1468134745]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeathMenu" type="VBoxContainer" parent="HUD/DeathScreen/DeathContent" unique_id=353596016]
+layout_mode = 2
+
+[node name="DeathTitle" type="Label" parent="HUD/DeathScreen/DeathContent/DeathMenu" unique_id=1941228153]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "HAS MUERTO"
+
+[node name="RetryButton" type="Button" parent="HUD/DeathScreen/DeathContent/DeathMenu" unique_id=450650871]
+layout_mode = 2
+text = "REINTENTAR"
+
+[node name="ExitButton" type="Button" parent="HUD/DeathScreen/DeathContent/DeathMenu" unique_id=1873019388]
+layout_mode = 2
+text = "SALIR"
+
+[node name="PauseScreen" type="ColorRect" parent="HUD" unique_id=43325280]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.70980394)
+
+[node name="PauseContent" type="CenterContainer" parent="HUD/PauseScreen" unique_id=1649535663]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="VBoxContainer" parent="HUD/PauseScreen/PauseContent" unique_id=1173715256]
+layout_mode = 2
+
+[node name="PauseTitle" type="Label" parent="HUD/PauseScreen/PauseContent/PauseMenu" unique_id=775878402]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "PAUSA"
+
+[node name="ResumeButton" type="Button" parent="HUD/PauseScreen/PauseContent/PauseMenu" unique_id=907172622]
+layout_mode = 2
+text = "CONTINUAR"
+
+[node name="RestartButton" type="Button" parent="HUD/PauseScreen/PauseContent/PauseMenu" unique_id=533906675]
+layout_mode = 2
+text = "REINICIAR NIVEL"
+
+[node name="ExitButton" type="Button" parent="HUD/PauseScreen/PauseContent/PauseMenu" unique_id=1864383895]
+layout_mode = 2
+text = "SALIR"
+
 [connection signal="body_entered" from="Player/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]
 [connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
 [connection signal="animation_finished" from="Player/PlayerVisual" to="Player" method="_on_player_visual_animation_finished"]
+[connection signal="body_entered" from="TestEnemy/DamageArea" to="TestEnemy" method="_on_damage_area_body_entered"]
+[connection signal="pressed" from="HUD/DeathScreen/DeathContent/DeathMenu/RetryButton" to="HUD" method="_on_retry_button_pressed"]
+[connection signal="pressed" from="HUD/DeathScreen/DeathContent/DeathMenu/ExitButton" to="HUD" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/ResumeButton" to="HUD" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/RestartButton" to="HUD" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/ExitButton" to="HUD" method="_on_exit_button_pressed"]
