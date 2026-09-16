@@ -1,25 +1,26 @@
 [gd_scene format=3 uid="uid://berk1lokqonm2"]
 
 [ext_resource type="Script" uid="uid://dvq4krs6rkwyh" path="res://player.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://v0dpbws2pome" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cc4jf5l7p0d8y" path="res://assets/player/player_idle.png" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://n3yajrd03soh" path="res://assets/player/player_attack_fixed.png" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://ct0f1cvxgq1xa" path="res://assets/player/dash.png" id="3_5vw27"]
-[ext_resource type="Script" uid="uid://uhf0eb3wk2vr" path="res://test_enemy.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://da2peuhvkjamh" path="res://assets/player/player_walk_fixed.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://c6kwx20uw0eof" path="res://assets/player/hurt.png" id="4_4c57u"]
 [ext_resource type="Texture2D" uid="uid://du5hyv1n6rih1" path="res://assets/player/jump_final.png" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://jiv75el5tt35" path="res://assets/player/death_fixed.png" id="4_efxa6"]
+[ext_resource type="PackedScene" uid="uid://cpono5gvin0yd" path="res://enemies/skeleton.tscn" id="9_efxa6"]
 [ext_resource type="Script" uid="uid://c365tetq46o8l" path="res://hud.gd" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://fr8iibisduji" path="res://assets/backgrounds/crypt_background.png" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://cfelltl6gy3ym" path="res://platforms/platform.tscn" id="12_ycdy4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
-size = Vector2(900, 60)
+size = Vector2(3456, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i88kt"]
-size = Vector2(32, 48)
+size = Vector2(42, 90)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfs5h"]
-size = Vector2(28, 32)
+size = Vector2(80, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yaehf"]
 atlas = ExtResource("2_7mycd")
@@ -36,14 +37,6 @@ region = Rect2(1086, 0, 543, 724)
 [sub_resource type="AtlasTexture" id="AtlasTexture_82xsv"]
 atlas = ExtResource("2_7mycd")
 region = Rect2(0, 724, 543, 724)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
-atlas = ExtResource("2_7mycd")
-region = Rect2(543, 724, 543, 724)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
-atlas = ExtResource("2_7mycd")
-region = Rect2(1086, 724, 543, 724)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lswn8"]
 atlas = ExtResource("3_5vw27")
@@ -179,16 +172,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_82xsv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_getpj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ryguw")
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 18.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -311,37 +298,37 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_we2th"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxrq4"]
-size = Vector2(38, 50)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
 bg_color = Color(0.24705882, 0.6627451, 0.9607843, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_we2th"]
+size = Vector2(40, 648)
 
 [node name="Main" type="Node2D" unique_id=1972889514]
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=771176472]
+position = Vector2(1728, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1039809105]
-position = Vector2(450, 500)
+position = Vector2(0, 571)
 shape = SubResource("RectangleShape2D_nmpfp")
 
 [node name="FloorVisual" type="ColorRect" parent="Floor" unique_id=1266664386]
+visible = false
 offset_top = 470.0
 offset_right = 900.0
 offset_bottom = 530.0
 color = Color(0.41598046, 0.41598043, 0.4159804, 1)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=763133737 groups=["player"]]
-position = Vector2(150, 446)
+position = Vector2(65, 496)
 script = ExtResource("1_0xm2m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=891382005]
 shape = SubResource("RectangleShape2D_i88kt")
 
 [node name="SwordHitbox" type="Area2D" parent="Player" unique_id=1956314339]
-position = Vector2(30, 0)
+position = Vector2(65, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/SwordHitbox" unique_id=125779142]
 shape = SubResource("RectangleShape2D_yfs5h")
@@ -352,35 +339,25 @@ wait_time = 0.12
 one_shot = true
 
 [node name="PlayerVisual" type="AnimatedSprite2D" parent="Player" unique_id=882115640]
-scale = Vector2(0.08, 0.08)
+scale = Vector2(0.16, 0.16)
 sprite_frames = SubResource("SpriteFrames_nmpfp")
-animation = &"death"
-frame = 5
-frame_progress = 1.0
+animation = &"idle"
+autoplay = "idle"
 
 [node name="FireballSpawn" type="Marker2D" parent="Player" unique_id=601515633]
-position = Vector2(30, 0)
+position = Vector2(55, 0)
 
-[node name="TestEnemy" type="CharacterBody2D" parent="." unique_id=151892316 groups=["enemy"]]
-position = Vector2(205, 446)
-script = ExtResource("3_h2yge")
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=514549437]
+limit_left = 0
+limit_top = 0
+limit_right = 3456
+limit_bottom = 648
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestEnemy" unique_id=410193620]
-shape = SubResource("RectangleShape2D_we2th")
+[node name="Skeleton" parent="." unique_id=1826252998 instance=ExtResource("9_efxa6")]
+position = Vector2(686, 500)
 
-[node name="EnemyVisual" type="Sprite2D" parent="TestEnemy" unique_id=542948016]
-modulate = Color(0.9444067, 0.6624789, 0.15236312, 1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_ig7tw")
-
-[node name="DamageArea" type="Area2D" parent="TestEnemy" unique_id=465923507]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestEnemy/DamageArea" unique_id=125413779]
-shape = SubResource("RectangleShape2D_lxrq4")
-
-[node name="DamageCooldown" type="Timer" parent="TestEnemy" unique_id=688446076]
-wait_time = 0.8
-one_shot = true
+[node name="Skeleton2" parent="." unique_id=2093011681 instance=ExtResource("9_efxa6")]
+position = Vector2(1101, 499)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=2109789310]
 process_mode = 3
@@ -474,10 +451,46 @@ text = "REINICIAR NIVEL"
 layout_mode = 2
 text = "SALIR"
 
+[node name="Background" type="Sprite2D" parent="." unique_id=2019380465]
+z_index = -10
+texture_filter = 1
+position = Vector2(576, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("12_dg77c")
+
+[node name="Background2" type="Sprite2D" parent="." unique_id=1268577128]
+z_index = -10
+texture_filter = 1
+position = Vector2(1728, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("12_dg77c")
+
+[node name="Background3" type="Sprite2D" parent="." unique_id=489863233]
+z_index = -10
+texture_filter = 1
+position = Vector2(2880, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("12_dg77c")
+
+[node name="Platform" parent="." unique_id=617727153 instance=ExtResource("12_ycdy4")]
+position = Vector2(578, 365)
+width = 500.0
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=186527]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=354734902]
+position = Vector2(-20, 324)
+shape = SubResource("RectangleShape2D_we2th")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=452342138]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1467472229]
+position = Vector2(3476, 324)
+shape = SubResource("RectangleShape2D_we2th")
+
 [connection signal="body_entered" from="Player/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]
 [connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
 [connection signal="animation_finished" from="Player/PlayerVisual" to="Player" method="_on_player_visual_animation_finished"]
-[connection signal="body_entered" from="TestEnemy/DamageArea" to="TestEnemy" method="_on_damage_area_body_entered"]
 [connection signal="pressed" from="HUD/DeathScreen/DeathContent/DeathMenu/RetryButton" to="HUD" method="_on_retry_button_pressed"]
 [connection signal="pressed" from="HUD/DeathScreen/DeathContent/DeathMenu/ExitButton" to="HUD" method="_on_exit_button_pressed"]
 [connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/ResumeButton" to="HUD" method="_on_resume_button_pressed"]
