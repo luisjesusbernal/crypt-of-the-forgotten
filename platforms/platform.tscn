@@ -3,14 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://ctr7uuovbgqb" path="res://assets/platforms/platform_stone_tile_64x30.png" id="1_64b0s"]
 [ext_resource type="Script" uid="uid://14u0hscx0mo1" path="res://platforms/platform.gd" id="1_w7mls"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtrrn"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7mls"]
 size = Vector2(300, 30)
 
 [node name="Platform" type="StaticBody2D" unique_id=617727153]
+collision_layer = 2
 script = ExtResource("1_w7mls")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=466460463]
-shape = SubResource("RectangleShape2D_dtrrn")
+shape = SubResource("RectangleShape2D_w7mls")
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1685124070]

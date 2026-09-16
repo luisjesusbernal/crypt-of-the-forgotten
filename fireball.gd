@@ -2,6 +2,7 @@ extends Area2D
 
 const SPEED = 500.0
 
+@onready var fireball_visual: AnimatedSprite2D = $FireballVisual
 var direction = 1.0
 
 
@@ -20,3 +21,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 	# Si golpea enemigo, suelo, pared, etc., desaparece.
 	queue_free()
+
+func _ready() -> void:
+	fireball_visual.flip_h = direction < 0

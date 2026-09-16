@@ -5,11 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://n3yajrd03soh" path="res://assets/player/player_attack_fixed.png" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://ct0f1cvxgq1xa" path="res://assets/player/dash.png" id="3_5vw27"]
 [ext_resource type="Texture2D" uid="uid://da2peuhvkjamh" path="res://assets/player/player_walk_fixed.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://dl3qmn0r7b556" path="res://assets/player/crouch.png" id="3_vivmo"]
+[ext_resource type="Texture2D" uid="uid://bq578lwsclkvu" path="res://assets/player/crouch_attack.png" id="4_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://c6kwx20uw0eof" path="res://assets/player/hurt.png" id="4_4c57u"]
 [ext_resource type="Texture2D" uid="uid://du5hyv1n6rih1" path="res://assets/player/jump_final.png" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://jiv75el5tt35" path="res://assets/player/death_fixed.png" id="4_efxa6"]
 [ext_resource type="PackedScene" uid="uid://cpono5gvin0yd" path="res://enemies/skeleton.tscn" id="9_efxa6"]
 [ext_resource type="Script" uid="uid://c365tetq46o8l" path="res://hud.gd" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://bw8sa186h5qkq" path="res://assets/player/slash.png" id="9_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://fr8iibisduji" path="res://assets/backgrounds/crypt_background.png" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cfelltl6gy3ym" path="res://platforms/platform.tscn" id="12_ycdy4"]
 
@@ -38,6 +41,34 @@ region = Rect2(1086, 0, 543, 724)
 atlas = ExtResource("2_7mycd")
 region = Rect2(0, 724, 543, 724)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2t1y"]
+atlas = ExtResource("3_vivmo")
+region = Rect2(0, 54, 543, 697)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gngh3"]
+atlas = ExtResource("3_vivmo")
+region = Rect2(543, 54, 543, 697)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n3wm"]
+atlas = ExtResource("3_vivmo")
+region = Rect2(0, 751, 543, 697)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnost"]
+atlas = ExtResource("3_vivmo")
+region = Rect2(543, 751, 543, 697)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnkbs"]
+atlas = ExtResource("4_2cqfq")
+region = Rect2(0, 54, 543, 697)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6a44"]
+atlas = ExtResource("4_2cqfq")
+region = Rect2(543, 54, 543, 697)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cbny"]
+atlas = ExtResource("4_2cqfq")
+region = Rect2(0, 751, 543, 697)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_lswn8"]
 atlas = ExtResource("3_5vw27")
 region = Rect2(0, 0, 627, 836)
@@ -64,15 +95,11 @@ region = Rect2(886, 0, 443, 591)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1qrp"]
 atlas = ExtResource("4_efxa6")
-region = Rect2(0, 591, 443, 591)
+region = Rect2(443, 631, 443, 551)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_come4"]
 atlas = ExtResource("4_efxa6")
-region = Rect2(443, 591, 443, 591)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h8e4i"]
-atlas = ExtResource("4_efxa6")
-region = Rect2(886, 591, 443, 591)
+region = Rect2(886, 631, 443, 551)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qsp4k"]
 atlas = ExtResource("4_4c57u")
@@ -179,6 +206,37 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_d2t1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gngh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n3wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnost")
+}],
+"loop": 0,
+"name": &"crouch",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnkbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6a44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cbny")
+}],
+"loop": 0,
+"name": &"crouch_attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lswn8")
 }, {
 "duration": 1.0,
@@ -206,13 +264,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_come4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h8e4i")
 }],
 "loop": 0,
 "name": &"death",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -298,6 +353,45 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxrq4"]
+size = Vector2(38, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
+atlas = ExtResource("9_ycdy4")
+region = Rect2(0, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
+atlas = ExtResource("9_ycdy4")
+region = Rect2(543, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lmeg"]
+atlas = ExtResource("9_ycdy4")
+region = Rect2(0, 724, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cp0l"]
+atlas = ExtResource("9_ycdy4")
+region = Rect2(543, 724, 543, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i88kt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryguw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lmeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cp0l")
+}],
+"loop": 0,
+"name": &"slash",
+"speed": 10.0
+}]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
 bg_color = Color(0.24705882, 0.6627451, 0.9607843, 1)
 
@@ -322,6 +416,7 @@ color = Color(0.41598046, 0.41598043, 0.4159804, 1)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=763133737 groups=["player"]]
 position = Vector2(65, 496)
+collision_mask = 3
 script = ExtResource("1_0xm2m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=891382005]
@@ -341,8 +436,10 @@ one_shot = true
 [node name="PlayerVisual" type="AnimatedSprite2D" parent="Player" unique_id=882115640]
 scale = Vector2(0.16, 0.16)
 sprite_frames = SubResource("SpriteFrames_nmpfp")
-animation = &"idle"
+animation = &"crouch"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="FireballSpawn" type="Marker2D" parent="Player" unique_id=601515633]
 position = Vector2(55, 0)
@@ -353,11 +450,28 @@ limit_top = 0
 limit_right = 3456
 limit_bottom = 648
 
+[node name="CrouchCeilingCheck" type="ShapeCast2D" parent="Player" unique_id=1116238153]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_lxrq4")
+target_position = Vector2(0, 0)
+collision_mask = 3
+
+[node name="SlashEffect" type="AnimatedSprite2D" parent="Player" unique_id=541044735]
+visible = false
+scale = Vector2(0.16, 0.16)
+sprite_frames = SubResource("SpriteFrames_i88kt")
+animation = &"slash"
+frame = 1
+frame_progress = 0.7114615
+
 [node name="Skeleton" parent="." unique_id=1826252998 instance=ExtResource("9_efxa6")]
-position = Vector2(686, 500)
+position = Vector2(820, 500)
 
 [node name="Skeleton2" parent="." unique_id=2093011681 instance=ExtResource("9_efxa6")]
-position = Vector2(1101, 499)
+position = Vector2(1600, 500)
+
+[node name="Skeleton3" parent="." unique_id=1297368278 instance=ExtResource("9_efxa6")]
+position = Vector2(2180, 500)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=2109789310]
 process_mode = 3
@@ -473,8 +587,15 @@ scale = Vector2(0.689, 0.689)
 texture = ExtResource("12_dg77c")
 
 [node name="Platform" parent="." unique_id=617727153 instance=ExtResource("12_ycdy4")]
-position = Vector2(578, 365)
-width = 500.0
+position = Vector2(430, 440)
+
+[node name="Platform2" parent="." unique_id=216220393 instance=ExtResource("12_ycdy4")]
+position = Vector2(1400, 440)
+width = 280.0
+
+[node name="Platform3" parent="." unique_id=1526330812 instance=ExtResource("12_ycdy4")]
+position = Vector2(1900, 365)
+width = 320.0
 
 [node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=186527]
 
@@ -491,6 +612,7 @@ shape = SubResource("RectangleShape2D_we2th")
 [connection signal="body_entered" from="Player/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]
 [connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
 [connection signal="animation_finished" from="Player/PlayerVisual" to="Player" method="_on_player_visual_animation_finished"]
+[connection signal="animation_finished" from="Player/SlashEffect" to="Player" method="_on_slash_effect_animation_finished"]
 [connection signal="pressed" from="HUD/DeathScreen/DeathContent/DeathMenu/RetryButton" to="HUD" method="_on_retry_button_pressed"]
 [connection signal="pressed" from="HUD/DeathScreen/DeathContent/DeathMenu/ExitButton" to="HUD" method="_on_exit_button_pressed"]
 [connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/ResumeButton" to="HUD" method="_on_resume_button_pressed"]
