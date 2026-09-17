@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://br6nufr6m1sg8"]
+
+[ext_resource type="Script" uid="uid://dcf8vqn57nao4" path="res://ground/ground_segment.gd" id="1_7tyqc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_figtk"]
+size = Vector2(800, 60)
+
+[node name="GroundSegment" type="StaticBody2D" unique_id=617727153]
+script = ExtResource("1_7tyqc")
+width = 800.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=466460463]
+shape = SubResource("RectangleShape2D_figtk")

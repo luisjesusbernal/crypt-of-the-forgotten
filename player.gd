@@ -62,6 +62,9 @@ var is_crouching = false
 
 func _ready() -> void:
 	player_visual.play("idle")
+
+	if GameState.has_checkpoint:
+		global_position = GameState.checkpoint_position
 	
 func _physics_process(delta: float) -> void:
 	# Gravedad.
@@ -122,7 +125,7 @@ func _physics_process(delta: float) -> void:
 
 	# Si soltamos S pero todavía hay algo sobre la cabeza,
 	# permanecer agachados.
-	elif is_crouching and crouch_ceiling_check.is_colliding():
+	elif is_on_floor() and crouch_ceiling_check.is_colliding():
 		set_crouching(true)
 
 	else:
@@ -291,6 +294,16 @@ func take_damage(amount: int, source_position: Vector2) -> void:
 	if health <= 0:
 		die()
 
+func heal_full() -> void:
+	if is_dead:
+		return
+
+	health = max_health
+	mana = max_mana
+
+	print("Jugador curado: ", health, "/", max_health)
+	print("Maná restaurado: ", mana, "/", max_mana)
+	
 func die() -> void:
 	if is_dead:
 		return

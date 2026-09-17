@@ -15,9 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://bw8sa186h5qkq" path="res://assets/player/slash.png" id="9_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://fr8iibisduji" path="res://assets/backgrounds/crypt_background.png" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cfelltl6gy3ym" path="res://platforms/platform.tscn" id="12_ycdy4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
-size = Vector2(3456, 60)
+[ext_resource type="PackedScene" uid="uid://br6nufr6m1sg8" path="res://ground/ground_segment.tscn" id="16_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://rriicgahup0e" path="res://assets/PitVisuals/PitVisual.png" id="17_yaehf"]
+[ext_resource type="PackedScene" uid="uid://bbkeecgxag7js" path="res://hazards/Spikes.tscn" id="18_074og"]
+[ext_resource type="Script" uid="uid://c364ebe0w2lo5" path="res://hazards/death_zone.gd" id="19_cegan"]
+[ext_resource type="PackedScene" uid="uid://clwaaqwx82vjb" path="res://hazards/FireSpinner.tscn" id="20_82xsv"]
+[ext_resource type="PackedScene" uid="uid://tbajsp711fib" path="res://hazards/SurfaceSpike.tscn" id="21_getpj"]
+[ext_resource type="PackedScene" uid="uid://dna3ufug33ypu" path="res://interactables/Altar.tscn" id="22_ryguw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i88kt"]
 size = Vector2(42, 90)
@@ -398,21 +402,10 @@ bg_color = Color(0.24705882, 0.6627451, 0.9607843, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_we2th"]
 size = Vector2(40, 648)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtrrn"]
+size = Vector2(6912, 200)
+
 [node name="Main" type="Node2D" unique_id=1972889514]
-
-[node name="Floor" type="StaticBody2D" parent="." unique_id=771176472]
-position = Vector2(1728, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1039809105]
-position = Vector2(0, 571)
-shape = SubResource("RectangleShape2D_nmpfp")
-
-[node name="FloorVisual" type="ColorRect" parent="Floor" unique_id=1266664386]
-visible = false
-offset_top = 470.0
-offset_right = 900.0
-offset_bottom = 530.0
-color = Color(0.41598046, 0.41598043, 0.4159804, 1)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=763133737 groups=["player"]]
 position = Vector2(65, 496)
@@ -447,7 +440,7 @@ position = Vector2(55, 0)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=514549437]
 limit_left = 0
 limit_top = 0
-limit_right = 3456
+limit_right = 6912
 limit_bottom = 648
 
 [node name="CrouchCeilingCheck" type="ShapeCast2D" parent="Player" unique_id=1116238153]
@@ -465,7 +458,7 @@ frame = 1
 frame_progress = 0.7114615
 
 [node name="Skeleton" parent="." unique_id=1826252998 instance=ExtResource("9_efxa6")]
-position = Vector2(820, 500)
+position = Vector2(609, 496)
 
 [node name="Skeleton2" parent="." unique_id=2093011681 instance=ExtResource("9_efxa6")]
 position = Vector2(1600, 500)
@@ -586,11 +579,32 @@ position = Vector2(2880, 324)
 scale = Vector2(0.689, 0.689)
 texture = ExtResource("12_dg77c")
 
+[node name="Background4" type="Sprite2D" parent="." unique_id=1054230405]
+z_index = -10
+texture_filter = 1
+position = Vector2(4032, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("12_dg77c")
+
+[node name="Background5" type="Sprite2D" parent="." unique_id=697149701]
+z_index = -10
+texture_filter = 1
+position = Vector2(5184, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("12_dg77c")
+
+[node name="Background6" type="Sprite2D" parent="." unique_id=929793744]
+z_index = -10
+texture_filter = 1
+position = Vector2(6336, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("12_dg77c")
+
 [node name="Platform" parent="." unique_id=617727153 instance=ExtResource("12_ycdy4")]
 position = Vector2(430, 440)
 
 [node name="Platform2" parent="." unique_id=216220393 instance=ExtResource("12_ycdy4")]
-position = Vector2(1400, 440)
+position = Vector2(1361, 441)
 width = 280.0
 
 [node name="Platform3" parent="." unique_id=1526330812 instance=ExtResource("12_ycdy4")]
@@ -606,8 +620,57 @@ shape = SubResource("RectangleShape2D_we2th")
 [node name="RightBoundary" type="StaticBody2D" parent="." unique_id=452342138]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1467472229]
-position = Vector2(3476, 324)
+position = Vector2(6932, 324)
 shape = SubResource("RectangleShape2D_we2th")
+
+[node name="GroundSegment" parent="." unique_id=1751867430 instance=ExtResource("16_2cqfq")]
+position = Vector2(576, 571)
+width = 1152.0
+
+[node name="GroundSegment4" parent="." unique_id=2061075092 instance=ExtResource("16_2cqfq")]
+position = Vector2(4032, 571)
+width = 1152.0
+
+[node name="GroundSegment5" parent="." unique_id=1198554387 instance=ExtResource("16_2cqfq")]
+position = Vector2(5184, 571)
+width = 1152.0
+
+[node name="GroundSegment6" parent="." unique_id=1091368929 instance=ExtResource("16_2cqfq")]
+position = Vector2(6336, 571)
+width = 1152.0
+
+[node name="GroundSegment2" parent="." unique_id=1119021645 instance=ExtResource("16_2cqfq")]
+position = Vector2(1678, 571)
+width = 1052.0
+
+[node name="GroundSegment3" parent="." unique_id=1256246008 instance=ExtResource("16_2cqfq")]
+position = Vector2(2930, 571)
+width = 1052.0
+
+[node name="PitVisual" type="Sprite2D" parent="." unique_id=336268183]
+z_index = -5
+position = Vector2(2304, 585)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_yaehf")
+
+[node name="Spikes" parent="." unique_id=1944624906 instance=ExtResource("18_074og")]
+position = Vector2(2304, 625)
+
+[node name="DeathZone" type="Area2D" parent="." unique_id=1891915247]
+script = ExtResource("19_cegan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=811076558]
+position = Vector2(3456, 800)
+shape = SubResource("RectangleShape2D_dtrrn")
+
+[node name="FireSpinner" parent="." unique_id=1465285194 instance=ExtResource("20_82xsv")]
+position = Vector2(1041, 439)
+
+[node name="SurfaceSpikes" parent="." unique_id=1457545307 instance=ExtResource("21_getpj")]
+position = Vector2(1267, 418)
+
+[node name="Altar" parent="." unique_id=1133643119 instance=ExtResource("22_ryguw")]
+position = Vector2(442, 364)
 
 [connection signal="body_entered" from="Player/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]
 [connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
@@ -618,3 +681,4 @@ shape = SubResource("RectangleShape2D_we2th")
 [connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/ResumeButton" to="HUD" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/RestartButton" to="HUD" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="HUD/PauseScreen/PauseContent/PauseMenu/ExitButton" to="HUD" method="_on_exit_button_pressed"]
+[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]
