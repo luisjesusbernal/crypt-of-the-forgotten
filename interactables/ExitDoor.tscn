@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://crim5buiqxy0"]
+
+[ext_resource type="Script" uid="uid://de8d5sa37ll64" path="res://interactables/exit_door.gd" id="1_kyt3h"]
+[ext_resource type="Texture2D" uid="uid://baf0gi73udoqw" path="res://assets/door/door.png" id="2_qsxwv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
+size = Vector2(120, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8pt2"]
+atlas = ExtResource("2_qsxwv")
+region = Rect2(0, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yov2"]
+atlas = ExtResource("2_qsxwv")
+region = Rect2(543, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou0r0"]
+atlas = ExtResource("2_qsxwv")
+region = Rect2(1086, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy2ff"]
+atlas = ExtResource("2_qsxwv")
+region = Rect2(1629, 0, 543, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsxwv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8pt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yov2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou0r0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy2ff")
+}],
+"loop": 0,
+"name": &"open",
+"speed": 6.0
+}]
+
+[node name="ExitDoor" type="Area2D" unique_id=1493001233]
+script = ExtResource("1_kyt3h")
+next_scene = "uid://dqpyppljtjfel"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874554482]
+shape = SubResource("RectangleShape2D_nmpfp")
+
+[node name="DoorVisual" type="AnimatedSprite2D" parent="." unique_id=954218747]
+z_index = -1
+position = Vector2(0, 18)
+scale = Vector2(0.22, 0.22)
+sprite_frames = SubResource("SpriteFrames_qsxwv")
+animation = &"open"
+frame = 3
+frame_progress = 1.0
+
+[node name="Label" type="Label" parent="." unique_id=2118015651]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "E - Entrar"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="animation_finished" from="DoorVisual" to="." method="_on_door_visual_animation_finished"]

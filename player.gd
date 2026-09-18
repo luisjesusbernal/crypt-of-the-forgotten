@@ -61,9 +61,15 @@ var is_crouching = false
 @onready var slash_effect: AnimatedSprite2D = $SlashEffect
 
 func _ready() -> void:
+	max_health = 3 + GameState.max_health_bonus
+	health = max_health
+
+	max_mana = 100.0 + GameState.max_mana_bonus
+	mana = max_mana
+
 	player_visual.play("idle")
 
-	if GameState.has_checkpoint:
+	if GameState.has_checkpoint and GameState.checkpoint_scene == get_tree().current_scene.scene_file_path:
 		global_position = GameState.checkpoint_position
 	
 func _physics_process(delta: float) -> void:

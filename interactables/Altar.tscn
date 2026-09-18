@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcaa52dfs3oit" path="res://interactables/altar.gd" id="1_t3r2x"]
 [ext_resource type="Texture2D" uid="uid://bjwftgynyw40" path="res://assets/altar/altar.png" id="2_g5mr7"]
+[ext_resource type="Texture2D" uid="uid://w2wl6fbitygc" path="res://assets/altar/altar_used.png" id="3_t5bu1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
 size = Vector2(120, 120)
@@ -42,20 +43,65 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_i00y8"]
+atlas = ExtResource("3_t5bu1")
+region = Rect2(0, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcg4s"]
+atlas = ExtResource("3_t5bu1")
+region = Rect2(543, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcwxl"]
+atlas = ExtResource("3_t5bu1")
+region = Rect2(1086, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyt3j"]
+atlas = ExtResource("3_t5bu1")
+region = Rect2(1629, 0, 543, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nmpfp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i00y8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcg4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcwxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyt3j")
+}],
+"loop": 1,
+"name": &"used",
+"speed": 5.0
+}]
+
 [node name="Altar" type="Area2D" unique_id=1133643119]
 script = ExtResource("1_t3r2x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=426266936]
 shape = SubResource("RectangleShape2D_nmpfp")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2101607319]
+[node name="ActiveVisual" type="AnimatedSprite2D" parent="." unique_id=2101607319]
 z_index = -1
 position = Vector2(0, -22)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_ryguw")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.85352147
+
+[node name="UsedVisual" type="AnimatedSprite2D" parent="." unique_id=1577041064]
+visible = false
+z_index = -1
+position = Vector2(0, -22)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_nmpfp")
+animation = &"used"
+autoplay = "used"
+frame_progress = 0.11123525
 
 [node name="Label" type="Label" parent="." unique_id=1758416964]
 visible = false
@@ -64,5 +110,29 @@ offset_bottom = 23.0
 text = "E - Usar altar
 "
 
+[node name="UpgradePanel" type="PanelContainer" parent="." unique_id=1892259917]
+visible = false
+offset_left = -81.0
+offset_top = -174.0
+offset_right = 81.0
+offset_bottom = -81.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradePanel" unique_id=1876572137]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="UpgradePanel/VBoxContainer" unique_id=364989341]
+layout_mode = 2
+text = "Elige una bendición"
+
+[node name="HealthButton" type="Button" parent="UpgradePanel/VBoxContainer" unique_id=28133247]
+layout_mode = 2
+text = "+1 Corazón máximo"
+
+[node name="ManaButton" type="Button" parent="UpgradePanel/VBoxContainer" unique_id=849565935]
+layout_mode = 2
+text = "+20 Maná máximo"
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="pressed" from="UpgradePanel/VBoxContainer/HealthButton" to="." method="_on_health_button_pressed"]
+[connection signal="pressed" from="UpgradePanel/VBoxContainer/ManaButton" to="." method="_on_mana_button_pressed"]

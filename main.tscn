@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://clwaaqwx82vjb" path="res://hazards/FireSpinner.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://tbajsp711fib" path="res://hazards/SurfaceSpike.tscn" id="21_getpj"]
 [ext_resource type="PackedScene" uid="uid://dna3ufug33ypu" path="res://interactables/Altar.tscn" id="22_ryguw"]
+[ext_resource type="PackedScene" uid="uid://crim5buiqxy0" path="res://interactables/ExitDoor.tscn" id="23_d13ii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i88kt"]
 size = Vector2(42, 90)
@@ -480,6 +481,7 @@ theme_override_font_sizes/font_size = 28
 text = "♥ ♥ ♥"
 
 [node name="ManaBar" type="ProgressBar" parent="HUD" unique_id=1297076277]
+visible = false
 offset_left = 20.0
 offset_top = 60.0
 offset_right = 200.0
@@ -487,6 +489,12 @@ offset_bottom = 78.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
 value = 100.0
 show_percentage = false
+
+[node name="ManaSegments" type="HBoxContainer" parent="HUD" unique_id=808633477]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 100.0
 
 [node name="DeathScreen" type="ColorRect" parent="HUD" unique_id=966930988]
 visible = false
@@ -671,6 +679,13 @@ position = Vector2(1267, 418)
 
 [node name="Altar" parent="." unique_id=1133643119 instance=ExtResource("22_ryguw")]
 position = Vector2(442, 364)
+
+[node name="Altar2" parent="." unique_id=642235581 instance=ExtResource("22_ryguw")]
+position = Vector2(5886, 460)
+altar_id = "level1_altar_2"
+
+[node name="ExitDoor" parent="." unique_id=1493001233 instance=ExtResource("23_d13ii")]
+position = Vector2(6733, 444)
 
 [connection signal="body_entered" from="Player/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]
 [connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
