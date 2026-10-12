@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bme4jd7kmnbto"]
+
+[ext_resource type="Script" uid="uid://bll1ioo6m5wd6" path="res://autoload/music_manager.gd" id="1_fnhjf"]
+
+[node name="MusicManager" type="Node" unique_id=875476281]
+script = ExtResource("1_fnhjf")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=563327703]
+volume_db = -8.0

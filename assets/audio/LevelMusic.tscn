@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://yxppdmx8di30"]
+
+[ext_resource type="Script" uid="uid://dy6646idnuyvd" path="res://assets/audio/level_music.gd" id="1_aegl3"]
+
+[node name="LevelMusic" type="Node" unique_id=1859383546]
+script = ExtResource("1_aegl3")

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dafcbv6erwut3"]
+
+[ext_resource type="Texture2D" uid="uid://fr8iibisduji" path="res://assets/backgrounds/crypt_background.png" id="1_ct8su"]
+[ext_resource type="Script" uid="uid://l0yrft5ki1pf" path="res://menus/main_menu.gd" id="1_ot3ob"]
+[ext_resource type="AudioStream" uid="uid://ch58nnhnubk81" path="res://assets/audio/music/MainMenu.mp3" id="3_rmsp1"]
+
+[node name="MainMenu" type="Control" unique_id=2130607563]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ot3ob")
+menu_music = ExtResource("3_rmsp1")
+
+[node name="Background" type="TextureRect" parent="." unique_id=157885350]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ct8su")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1370922989]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 285.0
+offset_right = 658.0
+offset_bottom = 334.0
+text = "CRYPT OF THE FORGOTTEN
+"
+
+[node name="MenuButtons" type="VBoxContainer" parent="." unique_id=1406927300]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 350.0
+offset_right = 595.0
+offset_bottom = 416.0
+
+[node name="NewGameButton" type="Button" parent="MenuButtons" unique_id=1339102234]
+layout_mode = 2
+text = "NEW GAME"
+
+[node name="QuitButton" type="Button" parent="MenuButtons" unique_id=386365693]
+layout_mode = 2
+text = "QUIT
+"
+
+[connection signal="pressed" from="MenuButtons/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_on_quit_button_pressed"]

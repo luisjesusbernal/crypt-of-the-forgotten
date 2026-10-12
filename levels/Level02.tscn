@@ -1,3 +1,91 @@
 [gd_scene format=3 uid="uid://dqpyppljtjfel"]
 
+[ext_resource type="PackedScene" uid="uid://blb70euch7ivd" path="res://player.tscn" id="1_vuing"]
+[ext_resource type="PackedScene" uid="uid://br6nufr6m1sg8" path="res://ground/ground_segment.tscn" id="2_e3750"]
+[ext_resource type="PackedScene" uid="uid://cpb4l7nc5t0t8" path="res://hud.tscn" id="2_snsha"]
+[ext_resource type="PackedScene" uid="uid://cfr715pbujqcd" path="res://death_zone.tscn" id="3_nlud0"]
+[ext_resource type="Texture2D" uid="uid://fr8iibisduji" path="res://assets/backgrounds/crypt_background.png" id="5_oiau6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
+size = Vector2(40, 648)
+
 [node name="Level02" type="Node2D" unique_id=274411826]
+
+[node name="Player" parent="." unique_id=2034696634 instance=ExtResource("1_vuing")]
+position = Vector2(150, 450)
+
+[node name="HUD" parent="." unique_id=1498970344 instance=ExtResource("2_snsha")]
+
+[node name="GroundSegment" parent="." unique_id=617727153 instance=ExtResource("2_e3750")]
+position = Vector2(576, 571)
+width = 1152.0
+
+[node name="GroundSegment2" parent="." unique_id=1560392850 instance=ExtResource("2_e3750")]
+position = Vector2(1728, 571)
+width = 1152.0
+
+[node name="GroundSegment3" parent="." unique_id=375521846 instance=ExtResource("2_e3750")]
+position = Vector2(2880, 571)
+width = 1152.0
+
+[node name="GroundSegment4" parent="." unique_id=2047013362 instance=ExtResource("2_e3750")]
+position = Vector2(4032, 571)
+width = 1152.0
+
+[node name="GroundSegment5" parent="." unique_id=1992747974 instance=ExtResource("2_e3750")]
+position = Vector2(5184, 571)
+width = 1152.0
+
+[node name="GroundSegment6" parent="." unique_id=928249847 instance=ExtResource("2_e3750")]
+position = Vector2(6336, 571)
+width = 1152.0
+
+[node name="DeathZone" parent="." unique_id=608227355 instance=ExtResource("3_nlud0")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=110915724]
+z_index = -10
+position = Vector2(576, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("5_oiau6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=619094963]
+z_index = -10
+position = Vector2(1728, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("5_oiau6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=294936043]
+z_index = -10
+position = Vector2(2880, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("5_oiau6")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1255796648]
+z_index = -10
+position = Vector2(4032, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("5_oiau6")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=463392966]
+z_index = -10
+position = Vector2(5184, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("5_oiau6")
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=1355631233]
+z_index = -10
+position = Vector2(6336, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("5_oiau6")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=2104437487]
+position = Vector2(-20, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1616196501]
+shape = SubResource("RectangleShape2D_nmpfp")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1511144557]
+position = Vector2(6932, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1331052314]
+shape = SubResource("RectangleShape2D_nmpfp")

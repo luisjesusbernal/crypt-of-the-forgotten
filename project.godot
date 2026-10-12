@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="Crypt of the Forgotten"
+run/main_scene="uid://dafcbv6erwut3"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameState="*uid://87igtnef3ix5"
+MusicManager="*uid://bme4jd7kmnbto"
 
 [display]
 

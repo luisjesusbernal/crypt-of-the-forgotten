@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://cpb4l7nc5t0t8"]
+
+[ext_resource type="Script" uid="uid://c365tetq46o8l" path="res://hud.gd" id="1_37p78"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
+bg_color = Color(0.24705882, 0.6627451, 0.9607843, 1)
+
+[node name="HUD" type="CanvasLayer" unique_id=1498970344]
+process_mode = 3
+script = ExtResource("1_37p78")
+
+[node name="HealthLabel" type="Label" parent="." unique_id=574621789]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 62.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(0.9098039, 0.2901961, 0.37254903, 1)
+theme_override_font_sizes/font_size = 28
+text = "♥ ♥ ♥"
+
+[node name="ManaBar" type="ProgressBar" parent="." unique_id=87720016]
+visible = false
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 78.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
+value = 100.0
+show_percentage = false
+
+[node name="ManaSegments" type="HBoxContainer" parent="." unique_id=82982114]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 100.0
+
+[node name="DeathScreen" type="ColorRect" parent="." unique_id=270223983]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.70980394)
+
+[node name="DeathContent" type="CenterContainer" parent="DeathScreen" unique_id=1626381556]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeathMenu" type="VBoxContainer" parent="DeathScreen/DeathContent" unique_id=364845982]
+layout_mode = 2
+
+[node name="DeathTitle" type="Label" parent="DeathScreen/DeathContent/DeathMenu" unique_id=1923202755]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "HAS MUERTO"
+
+[node name="RetryButton" type="Button" parent="DeathScreen/DeathContent/DeathMenu" unique_id=2087930089]
+layout_mode = 2
+text = "REINTENTAR"
+
+[node name="ExitButton" type="Button" parent="DeathScreen/DeathContent/DeathMenu" unique_id=1879840110]
+layout_mode = 2
+text = "SALIR"
+
+[node name="PauseScreen" type="ColorRect" parent="." unique_id=203174310]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.70980394)
+
+[node name="PauseContent" type="CenterContainer" parent="PauseScreen" unique_id=931348999]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="VBoxContainer" parent="PauseScreen/PauseContent" unique_id=1506374141]
+layout_mode = 2
+
+[node name="PauseTitle" type="Label" parent="PauseScreen/PauseContent/PauseMenu" unique_id=702040510]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "PAUSA"
+
+[node name="ResumeButton" type="Button" parent="PauseScreen/PauseContent/PauseMenu" unique_id=1013051039]
+layout_mode = 2
+text = "CONTINUAR"
+
+[node name="RestartButton" type="Button" parent="PauseScreen/PauseContent/PauseMenu" unique_id=1177892190]
+layout_mode = 2
+text = "REINICIAR NIVEL"
+
+[node name="ExitButton" type="Button" parent="PauseScreen/PauseContent/PauseMenu" unique_id=791736843]
+layout_mode = 2
+text = "SALIR"
+
+[connection signal="pressed" from="DeathScreen/DeathContent/DeathMenu/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="DeathScreen/DeathContent/DeathMenu/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseContent/PauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseContent/PauseMenu/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseContent/PauseMenu/ExitButton" to="." method="_on_exit_button_pressed"]

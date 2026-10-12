@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://sjcbii57uxrb"]
+
+[ext_resource type="Script" uid="uid://gpeg8mphl6yd" path="res://menus/intro.gd" id="1_a56wj"]
+
+[node name="Intro" type="Control" unique_id=1639228362]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_a56wj")
