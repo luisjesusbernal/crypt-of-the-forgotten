@@ -4,6 +4,7 @@ extends Area2D
 @onready var upgrade_panel: PanelContainer = $UpgradePanel
 @onready var active_visual: AnimatedSprite2D = $ActiveVisual
 @onready var used_visual: AnimatedSprite2D = $UsedVisual
+@onready var altar_sfx: AudioStreamPlayer = $AltarSFX
 
 var player_inside: bool = false
 var player: Node2D = null
@@ -20,6 +21,7 @@ func _process(_delta: float) -> void:
 	if player_inside and Input.is_action_just_pressed("interact") and not upgrade_open:
 		if player != null and player.has_method("heal_full"):
 			player.heal_full()
+			altar_sfx.play()
 
 			GameState.has_checkpoint = true
 			GameState.checkpoint_position = player.global_position

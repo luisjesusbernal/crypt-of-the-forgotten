@@ -4,6 +4,7 @@ extends Area2D
 
 @onready var prompt: Label = $Label
 @onready var door_visual: AnimatedSprite2D = $DoorVisual
+@onready var door_sfx: AudioStreamPlayer = $DoorSFX
 
 var player_inside: bool = false
 var is_opening: bool = false
@@ -25,6 +26,9 @@ func _start_opening() -> void:
 	
 	is_opening = true
 	prompt.visible = false
+	
+	door_sfx.play()
+	
 	door_visual.frame = 0
 	door_visual.play("open")
 	

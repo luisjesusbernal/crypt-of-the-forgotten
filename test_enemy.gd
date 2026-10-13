@@ -24,6 +24,9 @@ var is_dead = false
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var damage_area: Area2D = $DamageArea
 @onready var damage_area_collision: CollisionShape2D = $DamageArea/CollisionShape2D
+@onready var attack_sfx: AudioStreamPlayer = $AttackSFX
+@onready var hurt_sfx: AudioStreamPlayer = $HurtSFX
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
 
 func take_damage(amount: int) -> void:
 	if is_dead:
@@ -35,7 +38,7 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		die()
 		return
-
+	hurt_sfx.play()
 	# Cancelar cualquier ataque que estuviera haciendo.
 	is_attacking = false
 	has_dealt_damage = false
@@ -50,6 +53,8 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	is_dead = true
+	skeleton_visual.z_index = -1
+	death_sfx.play()
 	is_attacking = false
 	is_hurt = false
 	has_dealt_damage = false
@@ -166,5 +171,6 @@ func _on_skeleton_visual_frame_changed() -> void:
 		var distance_to_player = global_position.distance_to(player.global_position)
 
 		if distance_to_player <= ATTACK_RANGE and player.has_method("take_damage"):
+			attack_sfx.play()
 			player.take_damage(1, global_position)
 			has_dealt_damage = true

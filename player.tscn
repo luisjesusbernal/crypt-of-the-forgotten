@@ -11,6 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://du5hyv1n6rih1" path="res://assets/player/jump_final.png" id="9_pylmc"]
 [ext_resource type="Texture2D" uid="uid://da2peuhvkjamh" path="res://assets/player/player_walk_fixed.png" id="10_pbfsw"]
 [ext_resource type="Texture2D" uid="uid://bw8sa186h5qkq" path="res://assets/player/slash.png" id="11_5tmop"]
+[ext_resource type="AudioStream" uid="uid://ct8e5pvp43eqn" path="res://assets/audio/sfx/sword-slice.mp3" id="12_urp6f"]
+[ext_resource type="AudioStream" uid="uid://isfsnntda8fe" path="res://assets/audio/sfx/fireball-whoosh.mp3" id="13_bwjto"]
+[ext_resource type="AudioStream" uid="uid://bcgg0vv6aj5ud" path="res://assets/audio/sfx/hurt-sound.mp3" id="14_606se"]
+[ext_resource type="AudioStream" uid="uid://bxtq8o104mt8c" path="res://assets/audio/sfx/death-sound.mp3" id="15_u1c27"]
+[ext_resource type="AudioStream" uid="uid://djok6hq31jg0a" path="res://assets/audio/sfx/jump.mp3" id="16_op7ga"]
+[ext_resource type="AudioStream" uid="uid://durbtqk1ve4oq" path="res://assets/audio/sfx/Dash.mp3" id="17_q13i1"]
+[ext_resource type="AudioStream" uid="uid://dt7jvag3pg6dy" path="res://assets/audio/sfx/footstep.mp3" id="18_q13i1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i88kt"]
 size = Vector2(42, 90)
@@ -434,7 +441,36 @@ animation = &"slash"
 frame = 1
 frame_progress = 0.7114615
 
+[node name="SwordSFX" type="AudioStreamPlayer" parent="." unique_id=5920733]
+stream = ExtResource("12_urp6f")
+volume_db = -4.0
+
+[node name="FireballSFX" type="AudioStreamPlayer" parent="." unique_id=96011111]
+stream = ExtResource("13_bwjto")
+volume_db = -4.0
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="." unique_id=141121965]
+stream = ExtResource("14_606se")
+volume_db = -4.0
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=945238098]
+stream = ExtResource("15_u1c27")
+volume_db = -4.0
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="." unique_id=1226877723]
+stream = ExtResource("16_op7ga")
+volume_db = -4.0
+
+[node name="DashSFX" type="AudioStreamPlayer" parent="." unique_id=687072435]
+stream = ExtResource("17_q13i1")
+volume_db = -4.0
+
+[node name="FootstepSFX" type="AudioStreamPlayer" parent="." unique_id=1323063833]
+stream = ExtResource("18_q13i1")
+volume_db = -10.0
+
 [connection signal="body_entered" from="SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="animation_finished" from="PlayerVisual" to="." method="_on_player_visual_animation_finished"]
+[connection signal="frame_changed" from="PlayerVisual" to="." method="_on_player_visual_frame_changed"]
 [connection signal="animation_finished" from="SlashEffect" to="." method="_on_slash_effect_animation_finished"]

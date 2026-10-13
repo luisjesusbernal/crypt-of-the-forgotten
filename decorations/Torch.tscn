@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bu6eibc777d8d"]
+
+[ext_resource type="Script" uid="uid://dqqhm8es62bca" path="res://decorations/torch.gd" id="1_qx3ky"]
+[ext_resource type="Texture2D" uid="uid://lhedto4fb2q4" path="res://assets/hazards/torch_flame_fixed.png" id="1_ttqh8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qx3ky"]
+atlas = ExtResource("1_ttqh8")
+region = Rect2(543, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu5ob"]
+atlas = ExtResource("1_ttqh8")
+region = Rect2(1086, 0, 543, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_esrer"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qx3ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu5ob")
+}],
+"loop": 1,
+"name": &"burn",
+"speed": 4.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_ttqh8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2cqfq"]
+gradient = SubResource("Gradient_ttqh8")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="Torch" type="Node2D" unique_id=259515690]
+script = ExtResource("1_qx3ky")
+
+[node name="FlameVisual" type="AnimatedSprite2D" parent="." unique_id=798285006]
+z_index = -1
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_esrer")
+animation = &"burn"
+autoplay = "burn"
+frame_progress = 0.059644055
+
+[node name="TorchLight" type="PointLight2D" parent="." unique_id=1496422747]
+color = Color(1, 0.6039216, 0.27058825, 1)
+energy = 0.8
+texture = SubResource("GradientTexture2D_2cqfq")
+texture_scale = 0.7

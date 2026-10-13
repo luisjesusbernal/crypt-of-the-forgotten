@@ -1,13 +1,26 @@
 extends Area2D
 
 const SPEED = 500.0
+const MAX_DISTANCE = 760.0
 
 @onready var fireball_visual: AnimatedSprite2D = $FireballVisual
+
 var direction = 1.0
+var distance_traveled: float = 0.0
+
+
+func _ready() -> void:
+	fireball_visual.flip_h = direction < 0
 
 
 func _physics_process(delta: float) -> void:
-	position.x += SPEED * direction * delta
+	var movement := SPEED * delta
+
+	position.x += movement * direction
+	distance_traveled += movement
+
+	if distance_traveled >= MAX_DISTANCE:
+		queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -21,6 +34,3 @@ func _on_body_entered(body: Node2D) -> void:
 
 	# Si golpea enemigo, suelo, pared, etc., desaparece.
 	queue_free()
-
-func _ready() -> void:
-	fireball_visual.flip_h = direction < 0

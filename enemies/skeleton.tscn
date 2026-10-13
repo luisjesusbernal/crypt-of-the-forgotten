@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cqnyca0pmb102" path="res://assets/skeleton/skeleton_death.png" id="5_cyl7o"]
 [ext_resource type="Texture2D" uid="uid://htl7nnft1n8d" path="res://assets/skeleton/skeleton_idle_fixed.png" id="6_bwvbh"]
 [ext_resource type="Texture2D" uid="uid://blosvxoi00lo5" path="res://assets/skeleton/skeleton_walk_fixed.png" id="7_r0est"]
+[ext_resource type="AudioStream" uid="uid://bulrmxe3kf5s0" path="res://assets/audio/sfx/skeleton-sword-slash.mp3" id="8_y671r"]
+[ext_resource type="AudioStream" uid="uid://dhvk7uwy02nyk" path="res://assets/audio/sfx/bone hit.mp3" id="9_cyl7o"]
+[ext_resource type="AudioStream" uid="uid://ckteb36gddktv" path="res://assets/audio/sfx/bones collapse.mp3" id="10_bwvbh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_we2th"]
 size = Vector2(42, 90)
@@ -203,6 +206,18 @@ scale = Vector2(0.16, 0.16)
 sprite_frames = SubResource("SpriteFrames_i88kt")
 animation = &"death"
 autoplay = "idle"
+
+[node name="AttackSFX" type="AudioStreamPlayer" parent="." unique_id=864407022]
+stream = ExtResource("8_y671r")
+volume_db = -4.0
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="." unique_id=1226789708]
+stream = ExtResource("9_cyl7o")
+volume_db = -4.0
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=1265987050]
+stream = ExtResource("10_bwvbh")
+volume_db = -4.0
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="animation_finished" from="SkeletonVisual" to="." method="_on_skeleton_visual_animation_finished"]

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://berk1lokqonm2"]
 
+[ext_resource type="PackedScene" uid="uid://bu6eibc777d8d" path="res://decorations/Torch.tscn" id="1_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://yxppdmx8di30" path="res://assets/audio/LevelMusic.tscn" id="1_vivmo"]
 [ext_resource type="PackedScene" uid="uid://blb70euch7ivd" path="res://player.tscn" id="1_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://bxbajx8jvut01" path="res://assets/audio/music/Level01.mp3" id="2_2cqfq"]
@@ -20,6 +21,9 @@
 size = Vector2(40, 648)
 
 [node name="Main" type="Node2D" unique_id=1972889514]
+
+[node name="Torch" parent="." unique_id=259515690 instance=ExtResource("1_2cqfq")]
+position = Vector2(311, 275)
 
 [node name="LevelMusic" parent="." unique_id=1859383546 instance=ExtResource("1_vivmo")]
 music = ExtResource("2_2cqfq")

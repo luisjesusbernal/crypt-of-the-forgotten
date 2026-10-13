@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bcaa52dfs3oit" path="res://interactables/altar.gd" id="1_t3r2x"]
 [ext_resource type="Texture2D" uid="uid://bjwftgynyw40" path="res://assets/altar/altar.png" id="2_g5mr7"]
 [ext_resource type="Texture2D" uid="uid://w2wl6fbitygc" path="res://assets/altar/altar_used.png" id="3_t5bu1"]
+[ext_resource type="AudioStream" uid="uid://qhkt8tcfy0sm" path="res://assets/audio/sfx/altar_activate.mp3" id="4_rw5no"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
 size = Vector2(120, 120)
@@ -131,6 +132,10 @@ text = "+1 Corazón máximo"
 [node name="ManaButton" type="Button" parent="UpgradePanel/VBoxContainer" unique_id=849565935]
 layout_mode = 2
 text = "+20 Maná máximo"
+
+[node name="AltarSFX" type="AudioStreamPlayer" parent="." unique_id=816551423]
+stream = ExtResource("4_rw5no")
+volume_db = -4.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

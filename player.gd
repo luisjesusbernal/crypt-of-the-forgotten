@@ -59,6 +59,13 @@ var is_crouching = false
 @onready var sword_hitbox_standing_y: float = sword_hitbox.position.y
 @onready var fireball_spawn_standing_y: float = fireball_spawn.position.y
 @onready var slash_effect: AnimatedSprite2D = $SlashEffect
+@onready var sword_sfx: AudioStreamPlayer = $SwordSFX
+@onready var fireball_sfx: AudioStreamPlayer = $FireballSFX
+@onready var hurt_sfx: AudioStreamPlayer = $HurtSFX
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
+@onready var jump_sfx: AudioStreamPlayer = $JumpSFX
+@onready var dash_sfx: AudioStreamPlayer = $DashSFX
+@onready var footstep_sfx: AudioStreamPlayer = $FootstepSFX
 
 func _ready() -> void:
 	max_health = 3 + GameState.max_health_bonus
@@ -119,7 +126,7 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("jump") and jumps_left > 0 and not is_hurt:
 		velocity.y = JUMP_VELOCITY
 		jumps_left -= 1
-	
+		jump_sfx.play()
 	# Mientras bajamos atravesando una plataforma,
 	# permanecer agachados.
 	if drop_through_time_left > 0:
@@ -161,7 +168,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and dash_time_left <= 0 and dash_cooldown_left <= 0 and not is_hurt:
 		dash_time_left = DASH_DURATION
 		dash_cooldown_left = DASH_COOLDOWN
-
+		dash_sfx.play()
 	# Movimiento horizontal.
 	if is_hurt:
 	# El golpe comienza fuerte, pero pierde velocidad gradualmente.
@@ -186,6 +193,7 @@ func _physics_process(delta: float) -> void:
 	# Ataque con espada.
 	if Input.is_action_just_pressed("attack") and attack_timer.is_stopped() and not is_attacking and not is_hurt:
 		is_attacking = true
+		sword_sfx.play()
 
 		if is_crouching:
 			player_visual.play("crouch_attack")
@@ -205,6 +213,7 @@ func _physics_process(delta: float) -> void:
 	# Lanzar bola de fuego.
 	if Input.is_action_just_pressed("magic") and mana >= FIREBALL_MANA_COST and not is_hurt:
 		mana -= FIREBALL_MANA_COST
+		fireball_sfx.play()
 
 		var fireball = FIREBALL_SCENE.instantiate()
 		get_tree().current_scene.add_child(fireball)
@@ -293,6 +302,8 @@ func take_damage(amount: int, source_position: Vector2) -> void:
 	dash_time_left = 0.0
 	hurt_time_left = HURT_DURATION
 	
+	hurt_sfx.play()
+	
 	player_visual.play("hurt")
 	player_visual.modulate = Color(1.0, 0.35, 0.35)
 	
@@ -313,7 +324,9 @@ func heal_full() -> void:
 func die() -> void:
 	if is_dead:
 		return
-
+		
+	death_sfx.play()
+	
 	is_dead = true
 	velocity = Vector2.ZERO
 
@@ -325,3 +338,12 @@ func die() -> void:
 
 func _on_slash_effect_animation_finished() -> void:
 	slash_effect.visible = false
+
+
+func _on_player_visual_frame_changed() -> void:
+	if player_visual == null or footstep_sfx == null:
+		return
+
+	if player_visual.animation == "walk" and is_on_floor():
+		if player_visual.frame == 1 or player_visual.frame == 3:
+			footstep_sfx.play()

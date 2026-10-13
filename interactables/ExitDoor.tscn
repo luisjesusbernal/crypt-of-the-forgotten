@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://de8d5sa37ll64" path="res://interactables/exit_door.gd" id="1_kyt3h"]
 [ext_resource type="Texture2D" uid="uid://baf0gi73udoqw" path="res://assets/door/door.png" id="2_qsxwv"]
+[ext_resource type="AudioStream" uid="uid://bt1ssgj7nxn7f" path="res://assets/audio/sfx/door_opening.mp3" id="3_t8pt2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmpfp"]
 size = Vector2(120, 160)
@@ -63,6 +64,10 @@ visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "E - Entrar"
+
+[node name="DoorSFX" type="AudioStreamPlayer" parent="." unique_id=1977581057]
+stream = ExtResource("3_t8pt2")
+volume_db = -4.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ckteb36gddktv"
+path="res://.godot/imported/bones collapse.mp3-6839b1200337594195bc1b4f6f28ac11.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/sfx/bones collapse.mp3"
+dest_files=["res://.godot/imported/bones collapse.mp3-6839b1200337594195bc1b4f6f28ac11.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

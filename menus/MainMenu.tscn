@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://fr8iibisduji" path="res://assets/backgrounds/crypt_background.png" id="1_ct8su"]
 [ext_resource type="Script" uid="uid://l0yrft5ki1pf" path="res://menus/main_menu.gd" id="1_ot3ob"]
 [ext_resource type="AudioStream" uid="uid://ch58nnhnubk81" path="res://assets/audio/music/MainMenu.mp3" id="3_rmsp1"]
+[ext_resource type="Texture2D" uid="uid://lpwohscbbjvv" path="res://assets/menu/title.png" id="4_e2awe"]
+[ext_resource type="Texture2D" uid="uid://cbwilqrs5gl0h" path="res://assets/menu/new_game.png" id="5_lb38e"]
+[ext_resource type="Texture2D" uid="uid://3x768bl8bog5" path="res://assets/menu/quit.png" id="6_7fxis"]
 
 [node name="MainMenu" type="Control" unique_id=2130607563]
 layout_mode = 3
@@ -25,30 +28,39 @@ texture = ExtResource("1_ct8su")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="TitleLabel" type="Label" parent="." unique_id=1370922989]
+[node name="TitleImage" type="TextureRect" parent="." unique_id=814040344]
 layout_mode = 0
-offset_left = 450.0
-offset_top = 285.0
-offset_right = 658.0
-offset_bottom = 334.0
-text = "CRYPT OF THE FORGOTTEN
-"
+offset_left = 408.0
+offset_top = 77.0
+offset_right = 448.0
+offset_bottom = 117.0
+scale = Vector2(8.038537, 5.821976)
+texture = ExtResource("4_e2awe")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="MenuButtons" type="VBoxContainer" parent="." unique_id=1406927300]
+[node name="NewGameButton" type="TextureButton" parent="." unique_id=998024089]
 layout_mode = 0
-offset_left = 500.0
-offset_top = 350.0
-offset_right = 595.0
-offset_bottom = 416.0
+offset_left = 499.0
+offset_top = 279.0
+offset_right = 2671.0
+offset_bottom = 1003.0
+scale = Vector2(0.0655432, 0.06143514)
+texture_normal = ExtResource("5_lb38e")
+texture_pressed = ExtResource("5_lb38e")
+texture_hover = ExtResource("5_lb38e")
+stretch_mode = 0
 
-[node name="NewGameButton" type="Button" parent="MenuButtons" unique_id=1339102234]
-layout_mode = 2
-text = "NEW GAME"
+[node name="QuitButton" type="TextureButton" parent="." unique_id=1760722448]
+layout_mode = 0
+offset_left = 516.00006
+offset_top = 332.0
+offset_right = 2688.0
+offset_bottom = 1056.0
+scale = Vector2(0.04661863, 0.047015447)
+texture_normal = ExtResource("6_7fxis")
+texture_pressed = ExtResource("6_7fxis")
+texture_hover = ExtResource("6_7fxis")
 
-[node name="QuitButton" type="Button" parent="MenuButtons" unique_id=386365693]
-layout_mode = 2
-text = "QUIT
-"
-
-[connection signal="pressed" from="MenuButtons/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
