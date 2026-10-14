@@ -5,7 +5,11 @@
 
 [node name="Intro" type="Control" unique_id=1639228362]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_a56wj")
 
 [node name="Slide" type="TextureRect" parent="." unique_id=9237818]
@@ -13,8 +17,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_dhkec")
@@ -22,17 +25,25 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="SkipLabel" type="Label" parent="." unique_id=568804972]
-layout_mode = 0
-offset_left = 950.0
-offset_top = 605.0
-offset_right = 1140.0
-offset_bottom = 654.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -49.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "Hold E to Skip
 "
 
 [node name="Fade" type="ColorRect" parent="." unique_id=1636882442]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
